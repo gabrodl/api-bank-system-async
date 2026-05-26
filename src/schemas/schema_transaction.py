@@ -1,4 +1,4 @@
-from pydantic import BaseModel, Field, ConfigDict
+from pydantic import BaseModel, ConfigDict
 from src.models.model_transaction import TransactionType
 from datetime import datetime
 
