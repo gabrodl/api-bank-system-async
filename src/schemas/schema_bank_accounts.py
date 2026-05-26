@@ -1,13 +1,13 @@
-from pydantic import BaseModel, PositiveFloat, ConfigDict
+from pydantic import BaseModel, ConfigDict
 from datetime import datetime
 
 
 class BankAccountCreateRequest(BaseModel):
     account_number: str
-    balance: PositiveFloat
-    created_at: datetime
+    balance: float
     
 class BankAccountResponse(BaseModel):
+    id: int
     account_number: str
     balance: float
     created_at: datetime

@@ -5,8 +5,12 @@ from src.models.model_bank_accounts import BankAccounts
 from src.schemas.schema_bank_accounts import BankAccountCreateRequest, BankAccountResponse
 
 class BankAccountService:
-    async def read_all(self, session: AsyncSession, limit: int, skip: int=0) -> list[BankAccountResponse]:
-        query = select(BankAccounts).offset(skip).limit(limit)
+    async def read_all(
+        self,
+        session: AsyncSession
+        ) -> list[BankAccountResponse]:
+        
+        query = select(BankAccounts)
         
         result = await session.execute(query)
         
@@ -15,11 +19,15 @@ class BankAccountService:
         return [BankAccountResponse.model_validate(bank_account) for bank_account in bank_accounts]
     
     
-    async def create(self, session: AsyncSession, bank_account: BankAccountCreateRequest) -> BankAccountResponse:
+    async def create(
+        self,
+        session: AsyncSession,
+        bank_account: BankAccountCreateRequest
+        ) -> BankAccountResponse:
+        
         new_bank_account = BankAccounts(
             account_number=bank_account.account_number,
             balance=bank_account.balance,
-            created_at=bank_account.created_at,
         )
         
         session.add(new_bank_account)

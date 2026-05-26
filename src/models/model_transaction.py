@@ -1,6 +1,6 @@
 from typing import List
 import sqlalchemy as sa
-from sqlalchemy import ForeignKey
+from sqlalchemy import ForeignKey, func
 from sqlalchemy.orm import Mapped, mapped_column 
 from datetime import datetime
 import enum
@@ -20,5 +20,4 @@ class Transactions(Base):
     type:Mapped[TransactionType] = mapped_column(sa.Enum(TransactionType, name="transactiontype"), nullable=False)
     amount:Mapped[float] = mapped_column(nullable=False)
     description:Mapped[str] = mapped_column(nullable=True)
-    created_at:Mapped[datetime] = mapped_column(nullable=False)
-    updated_at:Mapped[datetime] = mapped_column(nullable=True)
+    created_at:Mapped[datetime] = mapped_column(server_default=func.now(), nullable=False)
